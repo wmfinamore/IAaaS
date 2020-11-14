@@ -30,7 +30,7 @@ class PrevisaoView(generics.views.APIView):
         try:
             # Recebe os dados enviados pela requisição
             model_id = request.POST.get('model_id')
-            csv_prever = request.POST.FILES['csv_prever']
+            csv_prever = request.FILES['csv_prever']
 
             if model_id:
                 # Busca o modelo usando o ORM do Django pelo model_id
@@ -59,7 +59,7 @@ class PrevisaoView(generics.views.APIView):
 
             # Fazer o load do binário do modelo
             modelo_automl = h2o.load_model(modelo_processado.binario_modelo.name)
-            prever = modelo_automl(teste)
+            prever = modelo_automl.predict(teste)
 
             data_frame = prever.as_data_frame()
 
