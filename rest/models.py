@@ -46,7 +46,7 @@ class ProcessamentoModeloMachineLearning(models.Model):
     tempo_maximo = models.PositiveIntegerField('Tempo máximo em segundos',
                                                validators=[MinValueValidator(settings.TEMPO_MINIMO_PROCESSAMENTO),
                                                            MaxValueValidator(settings.TEMPO_MAXIMO_PROCESSAMENTO)],)
-    modelos_processados = models.ManyToManyField('rest.ModeloMachineLearningProcessado')
+    modelos_processados = models.ManyToManyField('rest.ModeloMachineLearningProcessado', related_name='processamentos')
 
     class Meta:
         ordering = ['-data']
